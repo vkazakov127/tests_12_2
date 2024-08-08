@@ -5,17 +5,15 @@ import unittest
 
 
 class TournamentTest(unittest.TestCase):
-    global runner1, runner2, runner3, all_results
 
     @classmethod
     def setUpClass(cls):
         cls.all_results = []
 
     def setUp(self):
-        global runner1, runner2, runner3
-        runner1 = r_.Runner('Усэйн', 10)
-        runner2 = r_.Runner('Андрей', 9)
-        runner3 = r_.Runner('Ник', 3)
+        self.runner1 = r_.Runner('Усэйн', 10)
+        self.runner2 = r_.Runner('Андрей', 9)
+        self.runner3 = r_.Runner('Ник', 3)
 
     @classmethod
     def tearDownClass(cls):
@@ -29,34 +27,31 @@ class TournamentTest(unittest.TestCase):
             print(one_result_dict)
 
     def test_tour1(self):
-        global runner1, runner2, runner3, all_results
         # Андрей и Ник
-        tour1 = r_.Tournament(90, runner2, runner3)
+        tour1 = r_.Tournament(90, self.runner2, self.runner3)
         result1 = tour1.start()
-        self.all_results.append(result1)  # Сохраняем в общий список
+        self.__class__.all_results.append(result1)  # Сохраняем в общий список
         last_index = list(result1.keys())[-1]  # Индекс последнего бегуна
         last_name = result1.get(last_index)  # Имя последнего бегуна
         # --------- Собственно, тест
-        self.assertEqual(last_name, runner3.name)  # Тест
+        self.assertEqual(last_name, self.runner3.name)  # Тест
 
     def test_tour2(self):
-        global runner1, runner2, runner3, all_results
         # Усэйн и Ник
-        tour1 = r_.Tournament(90, runner1, runner3)
+        tour1 = r_.Tournament(90, self.runner1, self.runner3)
         result1 = tour1.start()
-        self.all_results.append(result1)  # Сохраняем в общий список
+        self.__class__.all_results.append(result1)  # Сохраняем в общий список
         last_index = list(result1.keys())[-1]  # Индекс последнего бегуна
         last_name = result1.get(last_index)  # Имя последнего бегуна
         # --------- Собственно, тест
-        self.assertEqual(last_name, runner3.name)  # Тест
+        self.assertEqual(last_name, self.runner3.name)  # Тест
 
     def test_tour3(self):
-        global runner1, runner2, runner3, all_results
         # Усэйн, Андрей и Ник
-        tour1 = r_.Tournament(90, runner1, runner2, runner3)
+        tour1 = r_.Tournament(90, self.runner1, self.runner2, self.runner3)
         result1 = tour1.start()
-        self.all_results.append(result1)  # Сохраняем в общий список
+        self.__class__.all_results.append(result1)  # Сохраняем в общий список
         last_index = list(result1.keys())[-1]  # Индекс последнего бегуна
         last_name = result1.get(last_index)  # Имя последнего бегуна
         # --------- Собственно, тест
-        self.assertEqual(last_name, runner3.name)  # Тест
+        self.assertEqual(last_name, self.runner3.name)  # Тест
